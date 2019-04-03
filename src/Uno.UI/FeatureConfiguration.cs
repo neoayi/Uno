@@ -183,5 +183,27 @@ namespace Uno.UI
 			public static bool ForceJavascriptInterop { get; set; } = false;
 		}
 #endif
+
+#if __ANDROID__
+		public static class LayoutProvider
+		{
+			/// <summary>
+			/// Allows <see cref="Uno.UI.LayoutProvider"/> to log the updated layout and to fire the <see cref="Uno.UI.LayoutProvider.DebugLayoutChanged"/> event.
+			/// </summary>
+			/// <remarks>
+			/// The log message will start with "Android layout has been updated: " followed by a json object containing
+			/// the values and the intermediate values used to calculate the layout, and the results. This can be used to
+			/// diagnostic layout issue relating to status bar, keyboard and navigation bar.
+			///
+			/// The <see cref="Uno.UI.LayoutProvider.DebugLayoutChanged"/> exposes the context of <see cref="Uno.UI.LayoutProvider.MeasureLayout(Android.Widget.PopupWindow)"/>
+			/// to facilite debugging without having to recompile Uno.UI:
+			/// <code>
+			///	// in MainActivity::OnCreate
+			///	LayoutProvider.Instance.DebugLayoutChanged += (activity, adjustNothingLayoutProvider, adjustResizeLayoutProvider) => { /* insert new logics to compute layout here */ };
+			/// </code>
+			/// </remarks>
+			public static bool DebugLayout { get; set; } = false;
+		}
+#endif
 	}
 }
