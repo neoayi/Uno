@@ -50,7 +50,7 @@ namespace Windows.UI.Xaml
 #endif
 
 		private bool _constraintsChanged;
-		
+
 		/// <remarks>
 		/// Both flags are present to avoid recursion (setting a style causes the root template
 		/// element to apply force the parent to apply its style, reverting the change that
@@ -165,7 +165,7 @@ namespace Windows.UI.Xaml
 		/// Under Uno.UI, this method should not be called during the normal layouting phase. Instead, use the
 		/// <see cref="MeasureElement(View, Size)"/> methods, which handles native view properly.
 		/// </remarks>
-		public override void Measure(Size availableSize)
+		public sealed override void Measure(Size availableSize)
 		{
 			_layouter.Measure(availableSize);
 			OnMeasurePartial(availableSize);
@@ -176,7 +176,7 @@ namespace Windows.UI.Xaml
 		/// for their child elements should call this method from their layout override implementations to form a recursive layout update. 
 		/// </summary>
 		/// <param name="finalRect">The final size that the parent computes for the child in layout, provided as a <see cref="Windows.Foundation.Rect"/> value.</param>
-		public override void Arrange(Rect finalRect)
+		public sealed override void Arrange(Rect finalRect)
 		{
 			_layouter.Arrange(finalRect);
 			_layouter.ArrangeChild(this, finalRect);
