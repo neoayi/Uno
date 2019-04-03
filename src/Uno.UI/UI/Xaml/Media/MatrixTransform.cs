@@ -31,5 +31,7 @@ namespace Windows.UI.Xaml.Media
 				"Matrix", typeof(Matrix),
 				typeof(MatrixTransform),
 				new FrameworkPropertyMetadata(Matrix.Identity, NotifyChangedCallback));
+
+		public override string ToString() => Matrix.IsIdentity ? "<Identity>" : Matrix.ToString();
 	}
 }
